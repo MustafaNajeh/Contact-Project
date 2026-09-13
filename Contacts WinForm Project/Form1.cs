@@ -1,0 +1,103 @@
+using System;
+using BussnissLogicLayer;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using BussnisLayer;
+using System.Reflection;
+
+namespace Contacts_WinForm_Project
+{
+    public partial class frmListContacts : Form
+    {
+        public frmListContacts()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            SetupModernDataGridView();
+            _RefreshContactsList();
+        }
+
+        private void SetupModernDataGridView()
+        {
+            // Apply modern styling to the existing DataGridView at runtime so Designer doesn't need changes
+            try
+            {
+                // Enable double buffering to reduce flicker
+                typeof(DataGridView).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic)
+                    .SetValue(dgvListContacts, true, null);
+            }
+            catch
+            {
+                // ignore if we can't set it
+            }
+
+            dgvListContacts.EnableHeadersVisualStyles = false;
+            dgvListContacts.BorderStyle = BorderStyle.None;
+            dgvListContacts.BackgroundColor = Color.White;
+            dgvListContacts.GridColor = Color.FromArgb(230, 230, 230);
+            dgvListContacts.RowHeadersVisible = false;
+            dgvListContacts.AllowUserToAddRows = false;
+            dgvListContacts.AllowUserToResizeRows = false;
+            dgvListContacts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvListContacts.MultiSelect = false;
+            dgvListContacts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvListContacts.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvListContacts.RowTemplate.Height = 40;
+            dgvListContacts.ColumnHeadersHeight = 45;
+            dgvListContacts.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(52, 152, 219);
+            dgvListContacts.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvListContacts.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dgvListContacts.RowsDefaultCellStyle.BackColor = Color.White;
+            dgvListContacts.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
+            dgvListContacts.SelectionBackColor = Color.FromArgb(41, 128, 185);
+            dgvListContacts.SelectionForeColor = Color.White;
+        }
+
+        private void _RefreshContactsList()
+        {
+            dgvListContacts.DataSource = clsContact.GetAllContacts();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to delete contact [" + dgvListContacts.CurrentRow.Cells[0].Value + "]", "Confirm Delete", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+
+                if (clsContact.DeleteContact((int)dgvListContacts.CurrentRow.Cells[0].Value))
+                {
+                    MessageBox.Show("deleted successfuly");
+                    _RefreshContactsList();
+                }
+
+            else
+                {
+                    MessageBox.Show("Click on the id", "Erorr", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void BtnAddNew_Click(object sender, EventArgs e)
+        {
+            frmAddEdit frm = new frmAddEdit(-1);
+            frm.ShowDialog();
+            _RefreshContactsList();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmAddEdit frm = new frmAddEdit((int)dgvListContacts.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+            _RefreshContactsList();
+        }
+    }
+}

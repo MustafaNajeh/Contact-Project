@@ -1,0 +1,13 @@
+C:\Users\Aa\source\Course-17\Countries Project\obj\Debug\Countries Project.csproj.AssemblyReference.cache
+C:\Users\Aa\source\Course-17\Countries Project\obj\Debug\Countries Project.csproj.CoreCompileInputs.cache
+C:\Users\Aa\source\Course-17\Countries Project\bin\Debug\Countries Project.exe.config
+C:\Users\Aa\source\Course-17\Countries Project\bin\Debug\Countries Project.exe
+C:\Users\Aa\source\Course-17\Countries Project\bin\Debug\Countries Project.pdb
+C:\Users\Aa\source\Course-17\Countries Project\bin\Debug\BussnissLogicLayer.dll
+C:\Users\Aa\source\Course-17\Countries Project\bin\Debug\DataAccessLayer.dll
+C:\Users\Aa\source\Course-17\Countries Project\bin\Debug\BussnissLogicLayer.pdb
+C:\Users\Aa\source\Course-17\Countries Project\bin\Debug\DataAccessLayer.pdb
+C:\Users\Aa\source\Course-17\Countries Project\obj\Debug\Countrie.4C538A1E.Up2Date
+C:\Users\Aa\source\Course-17\Countries Project\obj\Debug\Countries Project.exe
+C:\Users\Aa\source\Course-17\Countries Project\obj\Debug\Countries Project.pdb
+C:\Users\Aa\source\Course-17\Countries Project\obj\Debug\Countries Project.exe.config
